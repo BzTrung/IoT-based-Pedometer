@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=devise-width, initial-scale=1.0">
+        <title>Step</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+        <style>
+            #mode1{display:none;}
+            #mode2{display:none}
+            .running    {padding: 5px;
+                        background:crimson;
+                        border-radius: 20px;
+                        margin-left: 32%;
+                        font-size: 20px;
+                        color:#fff;}
+            .chart      {padding: 5px;
+                        background:cornflowerblue;
+                        border-radius: 20px;
+                        margin-left: 5%;
+                        font-size: 20px;
+                        color:#fff;}
+            .content{   width: 110%;
+                        margin-top: -50px;
+                        margin-left: -10px;
+                        padding: 0px;
+                        background: url(background.jpeg) no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                        height:100vh;
+                        transition: 0.5s;}
+            .leftbar    {z-index: 1;
+                        top: 0;
+                        background: #2f323a;
+                        margin-top: 160px;
+                        position:absolute;
+                        left:0;
+                        width:100%;
+                        height:100%;}
+            #mode1:checked ~ .leftbar{display: none;}
+
+        </style>
+        
+    </head>
+    <body>
+        <div>
+            <h1 style="color:#000; text-align: center;background:lightskyblue;padding: 20px;width: 100%; margin-top: 0px;margin-left: -10px;">Dem so buoc chan</h1>
+        </div>
+        <input type="radio" id="mode1" name="age" value="1" >
+        <input type="radio" id="mode2" name="age" value="2" >
+
+        <header>
+            <label for="mode1" class="running">
+                <i class="fa-solid fa-person-running">Number of steps</i>
+            </label>
+            <label for="mode2" class="chart">
+                <i class="fa-solid fa-chart-mixed">Chart of sensor</i>
+            </label>
+        </header>
+        <div class="content"></div>  
+
+    <!--step-->    
+        
+
+
+    <!--chart-->
+        <div class="leftbar">
+            <canvas id="myChart"></canvas>
+        </div>
+        <script>
+            var label = [1,2,3,4];
+            var a = [2,3,1,7];
+            
+            const chartdata = {
+            labels: label,
+                datasets: [{
+                    label: 'Pulse of a',
+                    backgroundColor: 'rgb(0, 0, 255)',
+                    borderColor: 'rgb(255,0,0)',
+                    borderWidth: 3,
+                    data: a,
+                    pointStyle: 'star',
+                    pointRadius: 0,
+                }
+            ]
+            };
+            const config = {
+                type: 'line',
+                data: chartdata,
+                options: {
+                    animation:false
+                }
+            };
+            var myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+            );
+            myChart.data.labels = label;
+            myChart.data.datasets[0].data = a;
+            myChart.update();
+    
+            
+    
+    
+        </script>
+        
+
+    </body>
+</html>

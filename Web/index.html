@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Group2_IoT</title>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <!-- //Meta Tags -->
+
+    <!-- Style-sheets -->
+    <!-- Bootstrap Css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap Css -->
+    <!-- Bars Css -->
+    <link rel="stylesheet" href="css/bar.css">
+    <!--// Bars Css -->
+    <!-- Calender Css -->
+    <link rel="stylesheet" type="text/css" href="css/pignose.calender.css" />
+    <!--// Calender Css -->
+    <!-- Common Css -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--// Common Css -->
+    <!-- Nav Css -->
+    <link rel="stylesheet" href="css/style4.css">
+    <!--// Nav Css -->
+    <!-- Fontawesome Css -->
+    <link href="css/fontawesome-all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!--// Fontawesome Css -->
+    <!--// Style-sheets -->
+
+    <!-- paho -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+    <script src="java_iot.js"></script>
+</head>
+
+<body>
+    <div class="se-pre-con"></div>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h1>
+                    <a href="index.html">Project</a>
+                </h1>
+                <span>P</span>
+            </div>
+            <div class="profile-bg"></div>
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="index.html">
+                        <i class="fas fa-th-large"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li >
+                    <a onclick="area_member()">
+                        <i class="fas fa-users"></i>
+                        Member
+                    </a>
+                </li>
+                <li class="active_step">
+                    <a onclick="area_step()">
+                        <i class="fa-solid fa-person-running"></i>
+                        Step
+                    </a>
+                </li>
+
+                <li class="active_chart">
+                    <a onclick="area_chart()">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Chart
+                        <span class="badge badge-secondary float-md-right bg-danger"></span>
+                    </a>
+                </li>
+
+                <li class="active_adjust">
+                    <a onclick="area_adjust()">
+                        <i class="fa-solid fa-sliders"></i>
+                        Adjust
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <!-- top-bar -->
+            <nav class="navbar navbar-default mb-xl-5 mb-4">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                    <!-- Search-from -->
+                    <form action="#" method="post" class="form-inline mx-auto search-form">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required="">
+                        <button class="btn btn-style my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <!--// Search-from -->
+                    <ul class="top-icons-agileits-w3layouts float-right">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="far fa-bell"></i>
+                                <span class="badge">99</span>
+                            </a>
+                            <div class="dropdown-menu top-grid-scroll drop-1">
+                                <h3 class="sub-title-w3-agileits">User notifications</h3>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <div class="notif-img-agileinfo">
+                                        <img src="images/clone.jpg" class="img-fluid" alt="Responsive image">
+                                    </div>
+                                    <div class="notif-content-wthree">
+                                        <p class="paragraph-agileits-w3layouts py-2">
+                                            <span class="text-diff">Trí Trung</span> đã đăng nhập</p>
+                                        <h6>1 mins ago</h6>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <div class="notif-img-agileinfo">
+                                        <img src="images/clone.jpg" class="img-fluid" alt="Responsive image">
+                                    </div>
+                                    <div class="notif-content-wthree">
+                                        <p class="paragraph-agileits-w3layouts py-2">
+                                            <span class="text-diff">Nhật Tiến</span> đã đăng nhập</p>
+                                        <h6>2 mins ago</h6>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <div class="notif-img-agileinfo">
+                                        <img src="images/clone.jpg" class="img-fluid" alt="Responsive image">
+                                    </div>
+                                    <div class="notif-content-wthree">
+                                        <p class="paragraph-agileits-w3layouts py-2">
+                                            <span class="text-diff">Phước Phát</span>đã đăng nhập</p>
+                                        <h6>3 mins ago</h6>
+                                    </div>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">view all notifications</a>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="far fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu drop-3">
+                                <div class="profile d-flex mr-o">
+                                    <div class="profile-l align-self-center">
+                                        <img src="images/images.jpeg" class="img-fluid mb-3" alt="Responsive image">
+                                    </div>
+                                    <div class="profile-r align-self-center">
+                                        <h3 class="sub-title-w3-agileits">Try hard</h3>
+                                        <a href="tritrungx6@gmail.com">info@example.com</a>
+                                    </div>
+                                </div>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="far fa-user mr-3"></i>My Profile</h4>
+                                </a>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="fas fa-link mr-3"></i>Activity</h4>
+                                </a>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="far fa-envelope mr-3"></i>Messages</h4>
+                                </a>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="far fa-question-circle mr-3"></i>Faq</h4>
+                                </a>
+                                <a href="#" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="far fa-thumbs-up mr-3"></i>Support</h4>
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="login.html">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--// top-bar -->
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Stats -->
+                    <div class="outer-w3-agile col-xl">
+                        <div class="stat-grid p-3 d-flex align-items-center justify-content-between bg-success">
+                            <div class="s-l">
+                                <h5>Project IoT</h5>
+                                <p class="paragraph-agileits-w3layouts text-white">Class: 02CLC</p>
+                            </div>
+                            <div class="s-r">
+                                <h6>Mssv<i class="fas fa-users"></i></h6>
+                            </div>
+                        </div>
+                        <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-info">
+                            <div class="s-l">
+                                <h5>Đặng Phước Phát</h5>
+                                <p class="paragraph-agileits-w3layouts"></p>
+                            </div>
+                            <div class="s-r">
+                                <h6>19146046</h6>
+                            </div>
+                        </div>
+                        <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-info">
+                            <div class="s-l">
+                                <h5>Nguyễn Nhật Tiến</h5>
+                                <p class="paragraph-agileits-w3layouts"></p>
+                            </div>
+                            <div class="s-r">
+                                <h6>19146273</h6>
+                            </div>
+                        </div>
+                        <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-info">
+                            <div class="s-l">
+                                <h5>Nguyễn Trí Trung</h5>
+                                <p class="paragraph-agileits-w3layouts"></p>
+                            </div>
+                            <div class="s-r">
+                                <h6>19146289</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// Stats -->
+                    <!-- Pie-chart -->
+                    <div class="outer-w3-agile col-xl ml-xl-3 mt-xl-0 mt-3">
+                        <div>
+                            <h4 class="tittle-w3-agileits mb-4" style="color: #ff0000;">Number of Steps</h4>
+                        </div>
+                        <div>
+                            
+                            <!--<span style='font-size:250px; margin-top: -225px; margin-left: 41%;'>&#9675;</span>-->
+                            <canvas id="myCanvas_step" width="850" height=300 style="border:5px solid #d3d3d3;"></canvas>
+                                
+                             
+                        </div>
+                        
+                    </div>
+                    <!--// Pie-chart -->
+                </div>
+            </div>
+            <!-- Simple-chart -->
+            <div class="outer-w3-agile mt-3">
+                <h4 class="tittle-w3-agileits mb-4">Graph</h4>
+                <div class="wrapper border border-3 rounded border-primary">
+                    <canvas id="myChart1"></canvas>
+                </div>
+            </div> 
+
+            <div  style="align-items: center;padding: 5px;
+                        background:#ccffff;
+                        margin-top: 30px;">
+            <div>
+                <label>Threshold</label>
+                <input type="number" id="set_threshold_id" >
+                <input type="button" class="btn btn-success" onclick="publish_client();" value="SET">
+            </div> 
+            </div>
+            <!--// Simple-chart -->
+
+            <!-- Copyright -->
+            <div class="copyright-w3layouts py-xl-3 py-2 mt-xl-5 mt-4 text-center">
+                <p>© Group 02 IoT | 02CLC 
+                </p>
+            </div>
+            <!--// Copyright -->
+        </div>
+    </div>
+
+
+    <!-- Required common Js -->
+    <script src='js/jquery-2.2.3.min.js'></script>
+    <!-- //Required common Js -->
+    
+    <!-- loading-gif Js -->
+    <script src="js/modernizr.js"></script>
+    <script>
+        //paste this code under head tag or in a seperate js file.
+        // Wait for window load
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
+        });
+    </script>
+    <!--// loading-gif Js -->
+
+    <!-- Sidebar-nav Js -->
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    <!--// Sidebar-nav Js -->
+   
+    <!-- Graph -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"> </script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        var label = [];
+        var a = [];
+        var b = [];
+        
+        const chartdata = {
+        labels: label,
+            datasets: [{
+                label: 'Pulse of A',
+                fill: false,
+                //backgroundColor: 'rgb(255,0,0)',    //color inside
+                borderColor: 'rgb(255,0,0)',        //color outside
+                borderWidth: 3,
+                data: a,
+                pointStyle: 'star',
+                pointRadius: 0,
+            },
+            {
+                label: 'Threshold',
+                fill: false,
+                //backgroundColor: 'rgb(255,0,0)',    //color inside
+                borderColor: 'rgb(0,255,0',        //color outside
+                borderWidth: 1.5,
+                data: b,
+                pointStyle: 'star',
+                pointRadius: 0,
+            }
+        ]
+        };
+        const config = {
+            type: 'line',
+            data: chartdata,
+            options: {
+                animation:false,
+                scales: {
+                    yAxes: [{ticks: {min: 0, max:2.5}}],
+                    }
+            }
+        };
+        var myChart1 = new Chart(
+            document.getElementById('myChart1'),
+            config
+        );
+
+        //load data tu database
+        $(document).ready(function(){
+            updateChart();
+         });
+        setInterval(updateChart,500);
+        function updateChart(){
+            // gui request xuong database de lay data
+            $.post('readData.php',function(data){
+                var label = [];
+                var a = [];
+                var b = [];
+                var step=0;
+                for(var i in data){
+                    label.push(data[i].stt);
+                    a.push(data[i].A);//gia tri cua databases
+                    step=data[i].step;
+                    b.push(document.getElementById("threshold_id").value)
+                }
+                var c = document.getElementById("myCanvas_step");
+                var ctx = c.getContext("2d");
+                    ctx.lineWidth=5;
+                    ctx.fillStyle='#ccffff';
+                    ctx.fillRect(0, 0, 850, 300);
+                    ctx.beginPath();
+                    ctx.fillStyle='#ffff99';
+                    ctx.arc(425, 150, 125, -0.05, 2 * Math.PI+0.05);
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.fillStyle='#000';
+                    //ctx.strokeStyle='blue';
+                    ctx.arc(425, 150, 100, -0.05, 2 * Math.PI+0.05);
+                    
+                    ctx.fill();
+                    ctx.stroke();
+                    
+                    ctx.font = "100px Arial";
+                    ctx.strokeStyle='#ff0000';
+                    ctx.lineWidth=4;
+                    ctx.strokeText(step,400-Math.floor(Math.log10(step))*25,180);
+
+                    //ctx.stroke();
+                    ctx.beginPath();
+                    ctx.strokeStyle='#ff0000';
+                    ctx.lineWidth=5;
+                    ctx.arc(425, 150, 100, -0.05, 1.5 * Math.PI+0.05);
+                    
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.strokeStyle='#cc0000';
+                    ctx.arc(425, 150, 108, 0, 1.5 * Math.PI);
+
+                    ctx.stroke();
+
+                
+                                        
+                myChart1.data.labels = label;
+                myChart1.data.datasets[0].data = a;
+                myChart1.data.datasets[1].data = b;
+                myChart1.update();
+            })
+        }
+        
+    </script>
+    <!--// Graph -->
+    
+
+    <!-- go to -->
+
+    <script>
+        function area_member(){
+            const element=document.getElementById("active_member");
+            element.scrollIntoView({behavior:'smooth', block: 'center'})
+        }
+        function area_step(){
+            const element=document.getElementById("myCanvas_step");
+            element.scrollIntoView({behavior:'smooth', block: 'center'})
+        }
+        function area_chart(){
+            const element=document.getElementById("myChart1");
+            element.scrollIntoView({behavior:'smooth', block: 'center'})
+        }
+        function area_adjust(){
+            const element=document.getElementById("form_submit");
+            element.scrollIntoView({behavior:'smooth', block: 'center'})
+        }
+    </script>
+    <!--// go to -->
+
+    <!-- dropdown nav -->
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <form id="form_mpu">
+        <input type="hidden" name="a_form" id="a_id">
+        <input type="hidden" name="step_form" id="step_id">
+        <input type="hidden" name="threshold_form" id="threshold_id" value="1.25">
+    </form>
+    <!-- //dropdown nav -->
+
+    <!-- Js for bootstrap working-->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- //Js for bootstrap working -->
+
+</body>
+
+</html>
